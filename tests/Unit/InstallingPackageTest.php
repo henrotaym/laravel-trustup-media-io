@@ -1,7 +1,7 @@
 <?php
-namespace Henrotaym\VersioningPackageTemplate\Tests\Unit;
+namespace Henrotaym\LaravelTrustupMediaIo\Tests\Unit;
 
-use Henrotaym\VersioningPackageTemplate\Tests\TestCase;
+use Henrotaym\LaravelTrustupMediaIo\Tests\TestCase;
 use Henrotaym\LaravelPackageVersioning\Testing\Traits\InstallPackageTest;
 
 class InstallingPackageTest extends TestCase

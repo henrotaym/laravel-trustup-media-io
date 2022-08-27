@@ -1,10 +1,10 @@
 <?php
-namespace Henrotaym\VersioningPackageTemplate\Providers;
+namespace Henrotaym\LaravelTrustupMediaIo\Providers;
 
-use Henrotaym\VersioningPackageTemplate\Package;
+use Henrotaym\LaravelTrustupMediaIo\Package;
 use Henrotaym\LaravelPackageVersioning\Providers\Abstracts\VersionablePackageServiceProvider;
 
-class VersioningPackageTemplateServiceProvider extends VersionablePackageServiceProvider
+class LaravelTrustupMediaIoServiceProvider extends VersionablePackageServiceProvider
 {
     public static function getPackageClass(): string
     {

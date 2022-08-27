@@ -1,5 +1,5 @@
 <?php
-namespace Henrotaym\VersioningPackageTemplate\Contracts;
+namespace Henrotaym\LaravelTrustupMediaIo\Contracts;
 
 use Henrotaym\LaravelPackageVersioning\Services\Versioning\Contracts\VersionablePackageContract;
 use Henrotaym\LaravelContainerAutoRegister\Services\AutoRegister\Contracts\AutoRegistrableContract;

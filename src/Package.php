@@ -1,7 +1,7 @@
 <?php
-namespace Henrotaym\VersioningPackageTemplate;
+namespace Henrotaym\LaravelTrustupMediaIo;
 
-use Henrotaym\VersioningPackageTemplate\Contracts\PackageContract;
+use Henrotaym\LaravelTrustupMediaIo\Contracts\PackageContract;
 use Henrotaym\LaravelPackageVersioning\Services\Versioning\VersionablePackage;
 
 class Package extends VersionablePackage implements PackageContract
