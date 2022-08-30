@@ -3,6 +3,8 @@ namespace Henrotaym\LaravelTrustupMediaIo\Tests;
 
 use Henrotaym\LaravelTrustupMediaIo\Package;
 use Henrotaym\LaravelPackageVersioning\Testing\VersionablePackageTestCase;
+use Deegitalbe\ServerAuthorization\Providers\ServerAuthorizationServiceProvider;
+use Henrotaym\LaravelApiClient\Providers\ClientServiceProvider;
 use Henrotaym\LaravelTrustupMediaIo\Providers\LaravelTrustupMediaIoServiceProvider;
 
 class TestCase extends VersionablePackageTestCase
@@ -15,6 +17,8 @@ class TestCase extends VersionablePackageTestCase
     public function getServiceProviders(): array
     {
         return [
+            ServerAuthorizationServiceProvider::class,
+            ClientServiceProvider::class,
             LaravelTrustupMediaIoServiceProvider::class
         ];
     }
