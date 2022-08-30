@@ -51,6 +51,7 @@ abstract class MediaResponse implements MediaResponseContract
     public function setResponse(TryResponseContract $response): MediaResponseContract
     {
         $this->response = $response;
+        $this->parseResponse();
 
         return $this;
     }
