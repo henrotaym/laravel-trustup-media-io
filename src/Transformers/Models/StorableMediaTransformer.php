@@ -22,14 +22,14 @@ class StorableMediaTransformer implements StorableMediaTransformerContract
         return $media
             ->setCollection($attributes['collection'] ?? null)
             ->setCustomProperties($attributes['custom_properties'] ?? [])
-            ->setName($attributes['name'] ?? null)
-            ->setResource($attributes['resource']);
+            ->setName($attributes['name'] ?? null);
     }
 
     /** @param string|UploadedFile|StreamInterface $resource */
     public function fromResource($resource): ?StorableMediaContract
     {
-        $media = $this->getNewMedia();
+        $media = $this->getNewMedia()
+            ->setResource($resource);
         
         if ($this->isStream($resource)):
             return $media->setAsStream();
@@ -52,6 +52,22 @@ class StorableMediaTransformer implements StorableMediaTransformerContract
         endif;
 
         return $media->setAsString();
+    }
+
+    public function toArray(StorableMediaContract $media): array
+    {
+        return [
+            'resource' => $media->isFile() ?
+                $media->getResource()->get()
+                : $media->getResource(),
+            'name' => $media->getName() ?:
+                ($media->isFile() ?
+                    $media->getResource()->getClientOriginalName()
+                    : null)
+            ,
+            'collection' => $media->getCollection(),
+            'custom_properties' => $media->getCustomProperties()
+        ];
     }
 
     protected function getNewMedia(): StorableMediaContract

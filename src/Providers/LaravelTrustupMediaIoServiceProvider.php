@@ -28,6 +28,10 @@ use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Models\MediaTransform
 use Henrotaym\LaravelPackageVersioning\Providers\Abstracts\VersionablePackageServiceProvider;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Models\ConversionTransformerContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Models\StorableMediaTransformerContract;
+use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Requests\Media\GetMediaRequestTransformerContract;
+use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Requests\Media\StoreMediaRequestTransformerContract;
+use Henrotaym\LaravelTrustupMediaIo\Transformers\Requests\Media\GetMediaRequestTransformer;
+use Henrotaym\LaravelTrustupMediaIo\Transformers\Requests\Media\StoreMediaRequestTransformer;
 
 class LaravelTrustupMediaIoServiceProvider extends VersionablePackageServiceProvider
 {
@@ -51,6 +55,8 @@ class LaravelTrustupMediaIoServiceProvider extends VersionablePackageServiceProv
         $this->app->bind(ConversionTransformerContract::class, ConversionTransformer::class);
         $this->app->bind(MediaTransformerContract::class, MediaTransformer::class);
         $this->app->bind(StorableMediaTransformerContract::class, StorableMediaTransformer::class);
+        $this->app->bind(GetMediaRequestTransformerContract::class, GetMediaRequestTransformer::class);
+        $this->app->bind(StoreMediaRequestTransformerContract::class, StoreMediaRequestTransformer::class);
     }
 
     protected function registerMediaEndpoint(): self

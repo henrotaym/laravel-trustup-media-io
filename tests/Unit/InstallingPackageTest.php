@@ -14,6 +14,8 @@ use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\StoreMediaResponse
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Models\MediaTransformerContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Models\ConversionTransformerContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Models\StorableMediaTransformerContract;
+use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Requests\Media\GetMediaRequestTransformerContract;
+use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Requests\Media\StoreMediaRequestTransformerContract;
 
 class InstallingPackageTest extends TestCase
 {
@@ -22,16 +24,20 @@ class InstallingPackageTest extends TestCase
     /** @test */
     public function gettingMediaClient()
     {
-        dd($this->app->make(MediaEndpointContract::class),
-        $this->app->make(ConversionContract::class),
-        $this->app->make(MediaContract::class),
-        $this->app->make(StorableMediaContract::class),
-        $this->app->make(GetMediaRequestContract::class),
-        $this->app->make(StoreMediaRequestContract::class),
-        $this->app->make(GetMediaResponseContract::class),
-        $this->app->make(StoreMediaResponseContract::class),
-        $this->app->make(ConversionTransformerContract::class),
-        $this->app->make(MediaTransformerContract::class),
-        $this->app->make(StorableMediaTransformerContract::class));
+        dd(
+            $this->app->make(MediaEndpointContract::class),
+            $this->app->make(ConversionContract::class),
+            $this->app->make(MediaContract::class),
+            $this->app->make(StorableMediaContract::class),
+            $this->app->make(GetMediaRequestContract::class),
+            $this->app->make(StoreMediaRequestContract::class),
+            $this->app->make(GetMediaResponseContract::class),
+            $this->app->make(StoreMediaResponseContract::class),
+            $this->app->make(ConversionTransformerContract::class),
+            $this->app->make(MediaTransformerContract::class),
+            $this->app->make(StorableMediaTransformerContract::class),
+            $this->app->make(GetMediaRequestTransformerContract::class),
+            $this->app->make(StoreMediaRequestTransformerContract::class),
+        );
     }
 }

@@ -10,15 +10,23 @@ use Henrotaym\LaravelTrustupMediaIo\Contracts\Requests\Media\GetMediaRequestCont
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Requests\Media\StoreMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\GetMediaResponseContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\StoreMediaResponseContract;
+use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Requests\Media\GetMediaRequestTransformerContract;
+use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Requests\Media\StoreMediaRequestTransformerContract;
 
 class MediaEndpoint implements MediaEndpointContract
 {
-    /** @var ClientContract */
-    protected $client;
+    protected ClientContract $client;
+    protected GetMediaRequestTransformerContract $getRequestTransformer;
+    protected StoreMediaRequestTransformerContract $storeRequestTransformer;
     
-    public function __construct(ClientContract $client)
-    {
+    public function __construct(
+        ClientContract $client,
+        GetMediaRequestTransformerContract $getRequestTransformer,
+        StoreMediaRequestTransformerContract $storeRequestTransformer,
+    ) {
         $this->client = $client;
+        $this->getRequestTransformer = $getRequestTransformer;
+        $this->storeRequestTransformer = $storeRequestTransformer;
     }
 
     public function store(StoreMediaRequestContract $request): StoreMediaResponseContract
@@ -26,16 +34,9 @@ class MediaEndpoint implements MediaEndpointContract
         /** @var RequestContract */
         $clientRequest = app()->make(RequestContract::class);
 
-        $clientRequest
-            ->setVerb('POST')
+        $clientRequest->setVerb('POST')
             ->setIsMultipart(true)
-            ->addData([
-                'model_id' => $request->getModelId(),
-                'model_type' => $request->getModelType(),
-                'app_key' => $request->getAppKey(),
-                'collection' => $request->getCollection(),
-                'files' => $request->getMedia()->map(fn (StorableMediaContract $media) => $this->storableMediaToData($media))->all()
-            ]);
+            ->addData($this->storeRequestTransformer->toArray($request));
 
         /** @var StoreMediaResponseContract */
         $response = app()->make(StoreMediaResponseContract::class);
@@ -43,22 +44,13 @@ class MediaEndpoint implements MediaEndpointContract
         return $response->setResponse($this->client->try($clientRequest, "Could not store media"));
     }
 
-    protected function storableMediaToData(StorableMediaContract $media): array
-    {
-        return [
-            'resource' => $media->isFile() ?
-                $media->getResource()->get()
-                : $media->getResource(),
-            'name' => $media->getName(),
-            'collection' => $media->getCollection(),
-            'custom_properties' => $media->getCustomProperties()
-        ];
-    }
-
     public function get(GetMediaRequestContract $request): GetMediaResponseContract
     {
         /** @var RequestContract */
         $clientRequest = app()->make(RequestContract::class);
+
+        $clientRequest->setVerb('GET')
+            ->addData($this->getRequestTransformer->toArray($request));
 
         /** @var GetMediaResponseContract */
         $response = app()->make(GetMediaResponseContract::class);
