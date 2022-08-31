@@ -6,6 +6,7 @@ use Henrotaym\LaravelPackageVersioning\Testing\VersionablePackageTestCase;
 use Deegitalbe\ServerAuthorization\Providers\ServerAuthorizationServiceProvider;
 use Henrotaym\LaravelApiClient\Providers\ClientServiceProvider;
 use Henrotaym\LaravelTrustupMediaIo\Providers\LaravelTrustupMediaIoServiceProvider;
+use Henrotaym\LaravelTrustupMediaIoCommon\Providers\LaravelTrustupMediaIoCommonServiceProvider;
 
 class TestCase extends VersionablePackageTestCase
 {
@@ -19,6 +20,7 @@ class TestCase extends VersionablePackageTestCase
         return [
             ServerAuthorizationServiceProvider::class,
             ClientServiceProvider::class,
+            LaravelTrustupMediaIoCommonServiceProvider::class,
             LaravelTrustupMediaIoServiceProvider::class
         ];
     }
