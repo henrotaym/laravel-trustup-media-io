@@ -8,14 +8,14 @@ use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\ConversionContract;
 class Media implements MediaContract
 {
     protected int $id;
-    protected ?string $collection;
-    protected ?string $appKey;
+    protected ?string $collection = null;
+    protected ?string $appKey = null;
     protected string $modelType;
     protected int $modelId;
     protected string $url;
     /** @var Collection<int, ConversionContract> */
     protected Collection $conversions;
-    protected ?string $thumbnail;
+    protected ?string $thumbnail = null;
     protected array $customProperties = [];
 
     public function getId(): int
