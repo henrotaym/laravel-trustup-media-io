@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5eb31f9e922be038da4b63f940e5fbf",
+    "content-hash": "3c190727e9d626b3297760a2c6b19af9",
     "packages": [
         {
             "name": "deegitalbe/server-authorization",
@@ -391,16 +391,16 @@
         },
         {
             "name": "henrotaym/laravel-api-client",
-            "version": "v1.4.2",
+            "version": "v1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/henrotaym/laravel-api-client.git",
-                "reference": "2735f2fcea2f07bef0e450e44048ca568f4f9e9c"
+                "reference": "da5f68ffc063a36236c0e6f5868ded62fecad6d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/henrotaym/laravel-api-client/zipball/2735f2fcea2f07bef0e450e44048ca568f4f9e9c",
-                "reference": "2735f2fcea2f07bef0e450e44048ca568f4f9e9c",
+                "url": "https://api.github.com/repos/henrotaym/laravel-api-client/zipball/da5f68ffc063a36236c0e6f5868ded62fecad6d0",
+                "reference": "da5f68ffc063a36236c0e6f5868ded62fecad6d0",
                 "shasum": ""
             },
             "require": {
@@ -438,9 +438,9 @@
             "description": "Fluent api client using laravel Http facade.",
             "support": {
                 "issues": "https://github.com/henrotaym/laravel-api-client/issues",
-                "source": "https://github.com/henrotaym/laravel-api-client/tree/v1.4.2"
+                "source": "https://github.com/henrotaym/laravel-api-client/tree/v1.4.3"
             },
-            "time": "2022-08-25T13:54:13+00:00"
+            "time": "2022-09-01T10:27:21+00:00"
         },
         {
             "name": "henrotaym/laravel-container-auto-register",
@@ -645,16 +645,16 @@
         },
         {
             "name": "henrotaym/laravel-trustup-media-io-common",
-            "version": "v1.0.1",
+            "version": "v1.0.2-alpha.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/henrotaym/laravel-trustup-media-io-common.git",
-                "reference": "69598069ad918fe5d7377aeb88903904dfc4f198"
+                "reference": "4c8aa07d1a2f8718e55098f3574119fd6cd48270"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/henrotaym/laravel-trustup-media-io-common/zipball/69598069ad918fe5d7377aeb88903904dfc4f198",
-                "reference": "69598069ad918fe5d7377aeb88903904dfc4f198",
+                "url": "https://api.github.com/repos/henrotaym/laravel-trustup-media-io-common/zipball/4c8aa07d1a2f8718e55098f3574119fd6cd48270",
+                "reference": "4c8aa07d1a2f8718e55098f3574119fd6cd48270",
                 "shasum": ""
             },
             "require": {
@@ -690,9 +690,9 @@
             "description": "Used by trustup applications to store and retrieve media",
             "support": {
                 "issues": "https://github.com/henrotaym/laravel-trustup-media-io-common/issues",
-                "source": "https://github.com/henrotaym/laravel-trustup-media-io-common/tree/v1.0.1"
+                "source": "https://github.com/henrotaym/laravel-trustup-media-io-common/tree/v1.0.2-alpha.1"
             },
-            "time": "2022-08-31T14:08:15+00:00"
+            "time": "2022-09-01T08:33:38+00:00"
         },
         {
             "name": "psr/http-client",
@@ -8100,7 +8100,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "henrotaym/laravel-trustup-media-io-common": 15
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
