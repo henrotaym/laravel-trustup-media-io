@@ -10,6 +10,6 @@ class MediaCredential extends AuthorizedServerCredential
     public function prepare(RequestContract &$request)
     {
         parent::prepare($request);
-        $request->setBaseUrl(Package::getConfig('media_url') . 'api/media');
+        $request->setBaseUrl(Package::getConfig('media_url') . '/api/media');
     }
 }
