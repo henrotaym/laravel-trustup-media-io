@@ -27,11 +27,11 @@ class MediaTransformer implements MediaTransformerContract
                         => $this->conversionTransformer->fromArray($rawConversion)
                     )
             )
-            ->setCustomProperties($attributes['custom_attributes'] ?? [])
+            ->setCustomProperties($attributes['custom_properties'] ?? [])
             ->setId($attributes['id'])
             ->setModelId($attributes['model_id'])
             ->setModelType($attributes['model_type'])
-            ->setThumbnail($attributes['thumbnail'] ?? null)
+            ->setUuid($attributes['uuid'])
             ->setUrl($attributes['url']);
     }
 }

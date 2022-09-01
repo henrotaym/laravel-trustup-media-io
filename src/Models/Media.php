@@ -10,12 +10,12 @@ class Media implements MediaContract
     protected int $id;
     protected ?string $collection = null;
     protected ?string $appKey = null;
+    protected string $uuid;
     protected string $modelType;
     protected int $modelId;
     protected string $url;
     /** @var Collection<int, ConversionContract> */
     protected Collection $conversions;
-    protected ?string $thumbnail = null;
     protected array $customProperties = [];
 
     public function getId(): int
@@ -44,6 +44,18 @@ class Media implements MediaContract
         return $this;
     }
 
+    public function getUuid(): string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(string $uuid): MediaContract
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
+
     public function hasConversions(): bool
     {
         return count($this->conversions) > 0;
@@ -67,17 +79,16 @@ class Media implements MediaContract
         return $this;
     }
 
-    public function getThumbnail(): ?string
+    public function getThumbnail(): ?ConversionContract
     {
-        return $this->thumbnail;
+        return $this->getConversion('thumbnail');
     }
 
-    /** @return static */
-    public function setThumbnail(?string $thumbnail): MediaContract
+    public function getConversion(string $name): ?ConversionContract
     {
-        $this->thumbnail = $thumbnail;
-
-        return $this;
+        return $this->getConversions()->first(fn(ConversionContract $conversion) =>
+            $conversion->getName() === $name
+        );
     }
 
     public function getCollection(): ?string

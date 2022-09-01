@@ -11,6 +11,7 @@ class ConversionTransformer implements ConversionTransformerContract
         /** @var ConversionContract */
         $conversion = app()->make(ConversionContract::class);
 
-        return $conversion->setUrl($attributes['url']);
+        return $conversion->setUrl($attributes['url'])
+            ->setName($attributes['name']);
     }
 }

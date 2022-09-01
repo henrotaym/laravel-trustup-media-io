@@ -12,9 +12,13 @@ interface MediaContract
     public function setId(int $id): MediaContract;
 
     public function getUrl(): string;
-
+    
     /** @return static */
     public function setUrl(string $url): MediaContract;
+    
+    public function getUuid(): string;
+
+    public function setUuid(string $uuid): MediaContract;
 
     public function hasConversions(): bool;
 
@@ -27,10 +31,9 @@ interface MediaContract
      */
     public function setConversions(Collection $conversions): MediaContract;
 
-    public function getThumbnail(): ?string;
+    public function getThumbnail(): ?ConversionContract;
 
-    /** @return static */
-    public function setThumbnail(?string $thumbnail): MediaContract;
+    public function getConversion(string $name): ?ConversionContract;
 
     public function getCollection(): ?string;
 
