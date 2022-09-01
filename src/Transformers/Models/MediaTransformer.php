@@ -1,6 +1,7 @@
 <?php
 namespace Henrotaym\LaravelTrustupMediaIo\Transformers\Models;
 
+use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\ConversionContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\MediaContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Models\MediaTransformerContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Models\ConversionTransformerContract;
@@ -33,5 +34,23 @@ class MediaTransformer implements MediaTransformerContract
             ->setModelType($attributes['model_type'])
             ->setUuid($attributes['uuid'])
             ->setUrl($attributes['url']);
+    }
+
+    public function toArray(MediaContract $media): array
+    {
+        return [
+            'app_key' => $media->getAppKey(), 
+            'collection' => $media->getCollection(), 
+            'conversions' => $media->getConversions()->map(
+                fn (ConversionContract $conversion) =>
+                    $this->conversionTransformer->toArray($conversion)
+            ),
+            'custom_properties' => $media->getCustomProperties(), 
+            'id' => $media->getId(), 
+            'model_id' => $media->getModelId(), 
+            'model_type' => $media->getModelType(), 
+            'uuid' => $media->getUuid(), 
+            'url' => $media->getUrl(), 
+        ];
     }
 }

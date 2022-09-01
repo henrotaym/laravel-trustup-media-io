@@ -6,4 +6,6 @@ use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\MediaContract;
 interface MediaTransformerContract
 {
     public function fromArray(array $attributes): MediaContract;
+
+    public function toArray(MediaContract $media): array;
 }

@@ -14,4 +14,12 @@ class ConversionTransformer implements ConversionTransformerContract
         return $conversion->setUrl($attributes['url'])
             ->setName($attributes['name']);
     }
+
+    public function toArray(ConversionContract $conversion): array
+    {
+        return [
+            'url' => $conversion->getUrl(),
+            'name' => $conversion->getName()
+        ];
+    }
 }
