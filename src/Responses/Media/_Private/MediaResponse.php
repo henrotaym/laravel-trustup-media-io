@@ -62,7 +62,7 @@ abstract class MediaResponse implements MediaResponseContract
             return;
         endif;
 
-        $media = $this->response->response()->get()['media'] ?? null;
+        $media = $this->response->response()->get(true)['data'] ?? null;
         
         if (!$media):
             return;
