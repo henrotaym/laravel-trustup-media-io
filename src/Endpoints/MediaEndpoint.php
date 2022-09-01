@@ -42,7 +42,7 @@ class MediaEndpoint implements MediaEndpointContract
         $apiResponse = $this->client->try($clientRequest, "Could not store media.");
 
         if ($apiResponse->failed()):
-            report($apiResponse->error()->context());
+            report($apiResponse->error());
         endif;
 
         return $response->setResponse($apiResponse);
@@ -58,7 +58,12 @@ class MediaEndpoint implements MediaEndpointContract
 
         /** @var GetMediaResponseContract */
         $response = app()->make(GetMediaResponseContract::class);
+        $apiResponse = $this->client->try($clientRequest, "Could not store media.");
 
-        return $response->setResponse($this->client->try($clientRequest, "Could not get media"));
+        if ($apiResponse->failed()):
+            report($apiResponse->error());
+        endif;
+
+        return $response->setResponse($apiResponse);
     }
 }
