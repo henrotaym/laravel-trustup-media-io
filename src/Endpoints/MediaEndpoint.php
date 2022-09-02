@@ -53,7 +53,8 @@ class MediaEndpoint implements MediaEndpointContract
         $clientRequest = app()->make(RequestContract::class);
 
         $clientRequest->setVerb('GET')
-            ->addData($this->getRequestTransformer->toArray($request));
+            ->setUrl('/')
+            ->addQuery($this->getRequestTransformer->toArray($request));
 
         /** @var GetMediaResponseContract */
         $response = app()->make(GetMediaResponseContract::class);
