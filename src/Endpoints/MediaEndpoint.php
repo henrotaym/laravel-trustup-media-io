@@ -34,6 +34,7 @@ class MediaEndpoint implements MediaEndpointContract
 
         $clientRequest->setVerb('POST')
             ->setUrl('/')
+            ->setIsMultipart(true)
             ->addData($this->storeRequestTransformer->toArray($request));
 
         /** @var StoreMediaResponseContract */
