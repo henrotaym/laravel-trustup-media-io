@@ -25,6 +25,11 @@ abstract class MediaResponse implements MediaResponseContract
         return $this->response->ok();
     }
 
+    public function getStatusCode(): int
+    {
+        return $this->response->response()->response()->status();
+    }
+
     public function hasMedia(): bool
     {
         return $this->getMedia()->isNotEmpty();
@@ -71,5 +76,12 @@ abstract class MediaResponse implements MediaResponseContract
         $this->media = collect($media)->map(fn (array $rawMedia) => 
             $this->transformer->fromArray($rawMedia)
         );
+    }
+
+    public function toArray()
+    {
+        return $this->ok() ?
+            $this->getResponse()->response()->toArray()
+            : $this->getResponse()->error()->context();
     }
 }
