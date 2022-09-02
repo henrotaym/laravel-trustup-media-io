@@ -34,7 +34,6 @@ class MediaEndpoint implements MediaEndpointContract
 
         $clientRequest->setVerb('POST')
             ->setUrl('/')
-            ->setIsMultipart(true)
             ->addData($this->storeRequestTransformer->toArray($request));
 
         /** @var StoreMediaResponseContract */
@@ -58,7 +57,7 @@ class MediaEndpoint implements MediaEndpointContract
 
         /** @var GetMediaResponseContract */
         $response = app()->make(GetMediaResponseContract::class);
-        $apiResponse = $this->client->try($clientRequest, "Could not store media.");
+        $apiResponse = $this->client->try($clientRequest, "Could not get media.");
 
         if ($apiResponse->failed()):
             report($apiResponse->error());
