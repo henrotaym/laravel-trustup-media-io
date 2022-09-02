@@ -24,7 +24,10 @@ trait HasTrustupMedia
         /** @var MediaEndpointContract */
         $endpoint = app()->make(MediaEndpointContract::class);
 
-        return $endpoint->store($request);
+        return $endpoint->store(
+            $request->setModelId($this->getModelId())
+                ->setModelType($this->getModelType())
+        );
     }
 
     public function getTrustupMedia(GetMediaRequestContract $request): GetMediaResponseContract
@@ -32,6 +35,9 @@ trait HasTrustupMedia
         /** @var MediaEndpointContract */
         $endpoint = app()->make(MediaEndpointContract::class);
 
-        return $endpoint->get($request);
+        return $endpoint->get(
+            $request->setModelId($this->getModelId())
+                ->setModelType($this->getModelType())
+        );
     }
 }
