@@ -6,6 +6,8 @@ use Henrotaym\LaravelApiClient\Contracts\RequestContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Endpoints\MediaEndpointContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\GetMediaResponseContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\StoreMediaResponseContract;
+use Henrotaym\LaravelTrustupMediaIo\Facades\Package;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\_Private\MediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\GetMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\StoreMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Requests\Media\GetMediaRequestTransformerContract;
@@ -29,6 +31,8 @@ class MediaEndpoint implements MediaEndpointContract
 
     public function store(StoreMediaRequestContract $request): StoreMediaResponseContract
     {
+        $this->prepareMediaRequest($request);
+        
         /** @var RequestContract */
         $clientRequest = app()->make(RequestContract::class);
 
@@ -50,6 +54,8 @@ class MediaEndpoint implements MediaEndpointContract
 
     public function get(GetMediaRequestContract $request): GetMediaResponseContract
     {
+        $this->prepareMediaRequest($request);
+        
         /** @var RequestContract */
         $clientRequest = app()->make(RequestContract::class);
 
@@ -66,5 +72,16 @@ class MediaEndpoint implements MediaEndpointContract
         endif;
 
         return $response->setResponse($apiResponse);
+    }
+
+    protected function prepareMediaRequest(MediaRequestContract &$request)
+    {
+        if ($request->hasAppKey()
+            || $request->isExplicitelyNotHavingAppKey()
+        ):
+            return;
+        endif;
+
+        $request->setAppKey(Package::getConfig('app_key'));
     }
 }

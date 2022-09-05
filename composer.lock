@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ba341459b55bfc3701fbb47fc81a6c3",
+    "content-hash": "e84dea0cdabd2608ce52708ff213889e",
     "packages": [
         {
             "name": "deegitalbe/server-authorization",
@@ -645,16 +645,16 @@
         },
         {
             "name": "henrotaym/laravel-trustup-media-io-common",
-            "version": "v1.0.4",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/henrotaym/laravel-trustup-media-io-common.git",
-                "reference": "a8e5942b8d5a02b951a3859c0ab5576957578b16"
+                "reference": "7ed295365273f12aebb27d771ebc880c495f9c24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/henrotaym/laravel-trustup-media-io-common/zipball/a8e5942b8d5a02b951a3859c0ab5576957578b16",
-                "reference": "a8e5942b8d5a02b951a3859c0ab5576957578b16",
+                "url": "https://api.github.com/repos/henrotaym/laravel-trustup-media-io-common/zipball/7ed295365273f12aebb27d771ebc880c495f9c24",
+                "reference": "7ed295365273f12aebb27d771ebc880c495f9c24",
                 "shasum": ""
             },
             "require": {
@@ -690,9 +690,9 @@
             "description": "Used by trustup applications to store and retrieve media",
             "support": {
                 "issues": "https://github.com/henrotaym/laravel-trustup-media-io-common/issues",
-                "source": "https://github.com/henrotaym/laravel-trustup-media-io-common/tree/v1.0.4"
+                "source": "https://github.com/henrotaym/laravel-trustup-media-io-common/tree/v1.0.5"
             },
-            "time": "2022-09-05T12:04:16+00:00"
+            "time": "2022-09-05T12:29:42+00:00"
         },
         {
             "name": "psr/http-client",
