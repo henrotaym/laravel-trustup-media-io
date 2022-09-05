@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e84dea0cdabd2608ce52708ff213889e",
+    "content-hash": "1f020cfaaddb88990f8ea108cd412077",
     "packages": [
         {
             "name": "deegitalbe/server-authorization",
@@ -645,16 +645,16 @@
         },
         {
             "name": "henrotaym/laravel-trustup-media-io-common",
-            "version": "v1.0.5",
+            "version": "v1.0.6-alpha.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/henrotaym/laravel-trustup-media-io-common.git",
-                "reference": "7ed295365273f12aebb27d771ebc880c495f9c24"
+                "reference": "fdaae2decb4a1705289b6d9d2ab62c00ccedec1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/henrotaym/laravel-trustup-media-io-common/zipball/7ed295365273f12aebb27d771ebc880c495f9c24",
-                "reference": "7ed295365273f12aebb27d771ebc880c495f9c24",
+                "url": "https://api.github.com/repos/henrotaym/laravel-trustup-media-io-common/zipball/fdaae2decb4a1705289b6d9d2ab62c00ccedec1b",
+                "reference": "fdaae2decb4a1705289b6d9d2ab62c00ccedec1b",
                 "shasum": ""
             },
             "require": {
@@ -690,9 +690,9 @@
             "description": "Used by trustup applications to store and retrieve media",
             "support": {
                 "issues": "https://github.com/henrotaym/laravel-trustup-media-io-common/issues",
-                "source": "https://github.com/henrotaym/laravel-trustup-media-io-common/tree/v1.0.5"
+                "source": "https://github.com/henrotaym/laravel-trustup-media-io-common/tree/v1.0.6-alpha.0"
             },
-            "time": "2022-09-05T12:29:42+00:00"
+            "time": "2022-09-05T12:50:17+00:00"
         },
         {
             "name": "psr/http-client",
@@ -8100,7 +8100,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "henrotaym/laravel-trustup-media-io-common": 15
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
