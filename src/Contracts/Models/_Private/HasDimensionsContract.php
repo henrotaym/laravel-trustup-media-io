@@ -3,9 +3,9 @@ namespace Henrotaym\LaravelTrustupMediaIo\Contracts\Models\_Private;
 
 interface HasDimensionsContract
 {
-    public function getWitdh(): int;
+    public function getWitdh(): ?int;
 
-    public function getHeight(): int;
+    public function getHeight(): ?int;
 
     /** @return static */
     public function setWitdh(?int $width): HasDimensionsContract;
