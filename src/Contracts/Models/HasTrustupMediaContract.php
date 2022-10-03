@@ -6,11 +6,11 @@ use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\StoreMediaResponse
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\GetMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\StoreMediaRequestContract;
 
-interface MediaModelContract
+interface HasTrustupMediaContract
 {
-    public function getModelId(): int;
+    public function getTrustupMediaModelId(): int;
 
-    public function getModelType(): string;
+    public function getTrustupMediaModelType(): string;
 
     public function addTrustupMedia(StoreMediaRequestContract $media): StoreMediaResponseContract;
 

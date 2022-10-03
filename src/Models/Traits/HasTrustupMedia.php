@@ -10,12 +10,12 @@ use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\StoreMediaReq
 
 trait HasTrustupMedia
 {
-    public function getModelId(): int
+    public function getTrustupMediaModelId(): int
     {
         return $this->id;
     }
 
-    public function getModelType(): string
+    public function getTrustupMediaModelType(): string
     {
         return $this->getTable();
     }
@@ -41,7 +41,7 @@ trait HasTrustupMedia
 
     public function prepareTrustupMediaRequest(MediaRequestContract &$request)
     {
-        $request->setModelId($this->getModelId())
-                ->setModelType($this->getModelType());
+        $request->setModelId($this->getTrustupMediaModelId())
+                ->setModelType($this->getTrustupMediaModelType());
     }
 }
