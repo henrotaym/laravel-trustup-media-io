@@ -1,10 +1,11 @@
 <?php
 namespace Henrotaym\LaravelTrustupMediaIo\Contracts\Models;
 
+use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\_Private\HasDimensionsContract;
 use Illuminate\Support\Collection;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\ConversionContract;
 
-interface MediaContract
+interface MediaContract extends HasDimensionsContract
 {
     public function getId(): int;
 

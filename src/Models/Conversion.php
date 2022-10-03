@@ -2,9 +2,12 @@
 namespace Henrotaym\LaravelTrustupMediaIo\Models;
 
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\ConversionContract;
+use Henrotaym\LaravelTrustupMediaIo\Models\Traits\HasDimensions;
 
 class Conversion implements ConversionContract
 {
+    use HasDimensions;
+
     protected string $url;
     protected string $name;
 

@@ -1,7 +1,9 @@
 <?php
 namespace Henrotaym\LaravelTrustupMediaIo\Contracts\Models;
 
-interface ConversionContract
+use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\_Private\HasDimensionsContract;
+
+interface ConversionContract extends HasDimensionsContract
 {
     public function getUrl(): string;
 

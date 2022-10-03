@@ -33,7 +33,9 @@ class MediaTransformer implements MediaTransformerContract
             ->setModelId($attributes['model_id'])
             ->setModelType($attributes['model_type'])
             ->setUuid($attributes['uuid'])
-            ->setUrl($attributes['url']);
+            ->setUrl($attributes['url'])
+            ->setWitdh($attributes['width'] ?? null)
+            ->setHeight($attributes['height'] ?? null);
     }
 
     public function toArray(MediaContract $media): array
@@ -50,7 +52,9 @@ class MediaTransformer implements MediaTransformerContract
             'model_id' => $media->getModelId(), 
             'model_type' => $media->getModelType(), 
             'uuid' => $media->getUuid(), 
-            'url' => $media->getUrl(), 
+            'url' => $media->getUrl(),
+            'width' => $media->getWitdh(),
+            "height" => $media->getHeight()
         ];
     }
 }

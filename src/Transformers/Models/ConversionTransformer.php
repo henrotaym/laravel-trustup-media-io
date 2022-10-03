@@ -12,14 +12,18 @@ class ConversionTransformer implements ConversionTransformerContract
         $conversion = app()->make(ConversionContract::class);
 
         return $conversion->setUrl($attributes['url'])
-            ->setName($attributes['name']);
+            ->setName($attributes['name'])
+            ->setWitdh($attributes['width'] ?? null)
+            ->setHeight($attributes['height'] ?? null);
     }
 
     public function toArray(ConversionContract $conversion): array
     {
         return [
             'url' => $conversion->getUrl(),
-            'name' => $conversion->getName()
+            'name' => $conversion->getName(),
+            'width' => $conversion->getWitdh(),
+            "height" => $conversion->getHeight()
         ];
     }
 }
