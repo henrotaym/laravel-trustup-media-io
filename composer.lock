@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8930de509f7077f5f79d0ae72e3b841c",
+    "content-hash": "216d5e942788803c1f8c3a22f4b50586",
     "packages": [
         {
             "name": "deegitalbe/server-authorization",
@@ -645,16 +645,16 @@
         },
         {
             "name": "henrotaym/laravel-trustup-media-io-common",
-            "version": "v1.0.6-alpha.4",
+            "version": "v1.0.6-alpha.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/henrotaym/laravel-trustup-media-io-common.git",
-                "reference": "249bf67ea9c82b27c9bc9500d072a7ca330dd058"
+                "reference": "e3110b0aca817b7e5e41c94ea790e5852980231d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/henrotaym/laravel-trustup-media-io-common/zipball/249bf67ea9c82b27c9bc9500d072a7ca330dd058",
-                "reference": "249bf67ea9c82b27c9bc9500d072a7ca330dd058",
+                "url": "https://api.github.com/repos/henrotaym/laravel-trustup-media-io-common/zipball/e3110b0aca817b7e5e41c94ea790e5852980231d",
+                "reference": "e3110b0aca817b7e5e41c94ea790e5852980231d",
                 "shasum": ""
             },
             "require": {
@@ -690,9 +690,9 @@
             "description": "Used by trustup applications to store and retrieve media",
             "support": {
                 "issues": "https://github.com/henrotaym/laravel-trustup-media-io-common/issues",
-                "source": "https://github.com/henrotaym/laravel-trustup-media-io-common/tree/v1.0.6-alpha.4"
+                "source": "https://github.com/henrotaym/laravel-trustup-media-io-common/tree/v1.0.6-alpha.5"
             },
-            "time": "2022-10-04T07:13:08+00:00"
+            "time": "2022-10-04T07:40:33+00:00"
         },
         {
             "name": "psr/http-client",
