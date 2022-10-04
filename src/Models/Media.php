@@ -10,6 +10,7 @@ class Media implements MediaContract
 {
     use HasDimensions;
 
+    protected ?string $name = null;
     protected int $id;
     protected ?string $collection = null;
     protected ?string $appKey = null;
@@ -20,6 +21,18 @@ class Media implements MediaContract
     /** @var Collection<int, ConversionContract> */
     protected Collection $conversions;
     protected array $customProperties = [];
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): MediaContract
+    {
+        $this->name = $name;
+
+        return $this;
+    }
 
     public function getId(): int
     {

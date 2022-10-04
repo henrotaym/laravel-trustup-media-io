@@ -7,6 +7,10 @@ use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\ConversionContract;
 
 interface MediaContract extends HasDimensionsContract
 {
+    public function getName(): ?string;
+
+    public function setName(?string $name): MediaContract;
+
     public function getId(): int;
 
     /** @return static */
