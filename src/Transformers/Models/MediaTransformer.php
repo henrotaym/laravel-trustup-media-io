@@ -37,7 +37,7 @@ class MediaTransformer implements MediaTransformerContract
             ->setWitdh($attributes['width'] ?? null)
             ->setHeight($attributes['height'] ?? null)
             ->setName($attributes['name'] ?? null)
-            ->setOptimized($attributes['optimized']);
+            ->setOptimized($this->conversionTransformer->fromArray($attributes['optimized']));
     }
 
     public function toArray(MediaContract $media): array
