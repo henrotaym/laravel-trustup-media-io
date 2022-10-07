@@ -21,10 +21,10 @@ interface MediaContract extends HasDimensionsContract
     /** @return static */
     public function setUrl(string $url): MediaContract;
     
-    public function getOptimizedUrl(): string;
+    public function getOptimized(): ConversionContract;
 
     /** @return static */
-    public function setOptimizedUrl(string $optimizedUrl): MediaContract;
+    public function setOptimized(ConversionContract $optimized): MediaContract;
     
     public function getUuid(): string;
 

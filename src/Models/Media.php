@@ -21,7 +21,7 @@ class Media implements MediaContract
     /** @var Collection<int, ConversionContract> */
     protected Collection $conversions;
     protected array $customProperties = [];
-    protected string $optimizedUrl;
+    protected ConversionContract $optimized;
 
     public function getName(): ?string
     {
@@ -61,15 +61,15 @@ class Media implements MediaContract
         return $this;
     }
 
-    public function getOptimizedUrl(): string
+    public function getOptimized(): ConversionContract
     {
-        return $this->optimizedUrl;
+        return $this->optimized;
     }
 
     /** @return static */
-    public function setOptimizedUrl(string $optimizedUrl): MediaContract
+    public function setOptimized(ConversionContract $optimized): MediaContract
     {
-        $this->optimizedUrl = $optimizedUrl;
+        $this->optimized = $optimized;
 
         return $this;
     }
