@@ -33,6 +33,10 @@ trait HasTrustupMedia
     public function getTrustupMedia(GetMediaRequestContract $request): GetMediaResponseContract
     {
         $this->prepareTrustupMediaRequest($request);
+        
+        $request->setExpectedWidth($request->getExpectedWidth() ?: request()->input('expected_width'))
+            ->setExpectedHeight($request->getExpectedHeight() ?: request()->input('expected_height'));
+
         /** @var MediaEndpointContract */
         $endpoint = app()->make(MediaEndpointContract::class);
 
