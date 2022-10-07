@@ -21,6 +21,11 @@ interface MediaContract extends HasDimensionsContract
     /** @return static */
     public function setUrl(string $url): MediaContract;
     
+    public function getOptimizedUrl(): string;
+
+    /** @return static */
+    public function setOptimizedUrl(string $optimizedUrl): MediaContract;
+    
     public function getUuid(): string;
 
     public function setUuid(string $uuid): MediaContract;
