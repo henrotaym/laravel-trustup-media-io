@@ -55,7 +55,7 @@ class MediaTransformer implements MediaTransformerContract
             'model_type' => $media->getModelType(), 
             'uuid' => $media->getUuid(), 
             'url' => $media->getUrl(),
-            'optimized' => $media->getOptimized(),
+            'optimized' => $this->conversionTransformer->toArray($media->getOptimized()),
             'width' => $media->getWitdh(),
             "height" => $media->getHeight(),
             "name" => $media->getName()
