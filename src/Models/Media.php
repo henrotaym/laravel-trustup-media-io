@@ -3,8 +3,8 @@ namespace Henrotaym\LaravelTrustupMediaIo\Models;
 
 use Illuminate\Support\Collection;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\MediaContract;
-use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\ConversionContract;
-use Henrotaym\LaravelTrustupMediaIo\Models\Traits\HasDimensions;
+use Henrotaym\LaravelTrustupMediaIoCommon\Models\Traits\HasDimensions;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Models\ConversionContract;
 
 class Media implements MediaContract
 {

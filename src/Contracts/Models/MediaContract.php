@@ -1,9 +1,9 @@
 <?php
 namespace Henrotaym\LaravelTrustupMediaIo\Contracts\Models;
 
-use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\_Private\HasDimensionsContract;
 use Illuminate\Support\Collection;
-use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\ConversionContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Models\ConversionContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Models\_Private\HasDimensionsContract;
 
 interface MediaContract extends HasDimensionsContract
 {

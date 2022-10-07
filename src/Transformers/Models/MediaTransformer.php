@@ -1,10 +1,10 @@
 <?php
 namespace Henrotaym\LaravelTrustupMediaIo\Transformers\Models;
 
-use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\ConversionContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\MediaContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Models\ConversionContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Models\MediaTransformerContract;
-use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Models\ConversionTransformerContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Models\ConversionTransformerContract;
 
 class MediaTransformer implements MediaTransformerContract
 {
