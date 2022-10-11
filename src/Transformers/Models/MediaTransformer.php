@@ -48,7 +48,7 @@ class MediaTransformer implements MediaTransformerContract
             'conversions' => $media->getConversions()->map(
                 fn (ConversionContract $conversion) =>
                     $this->conversionTransformer->toArray($conversion)
-            ),
+            )->all(),
             'custom_properties' => $media->getCustomProperties(), 
             'id' => $media->getId(), 
             'model_id' => $media->getModelId(), 
