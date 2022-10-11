@@ -8,7 +8,7 @@ use Henrotaym\LaravelTrustupMediaIoCommon\Models\Traits\HasDimensions;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Models\ConversionContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Models\MediaTransformerContract;
 
-class Media implements MediaContract, Arrayable
+class Media implements MediaContract
 {
     use HasDimensions;
 

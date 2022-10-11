@@ -4,8 +4,9 @@ namespace Henrotaym\LaravelTrustupMediaIo\Contracts\Models;
 use Illuminate\Support\Collection;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Models\ConversionContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Models\_Private\HasDimensionsContract;
+use Illuminate\Contracts\Support\Arrayable;
 
-interface MediaContract extends HasDimensionsContract
+interface MediaContract extends HasDimensionsContract, Arrayable
 {
     public function getName(): ?string;
 
