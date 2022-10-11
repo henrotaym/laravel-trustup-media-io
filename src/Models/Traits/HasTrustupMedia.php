@@ -1,9 +1,11 @@
 <?php
 namespace Henrotaym\LaravelTrustupMediaIo\Models\Traits;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Psr\Http\Message\StreamInterface;
+use Illuminate\Database\Eloquent\Model;
 use Henrotaym\LaravelTrustupMediaIoCommon\Enums\Media\MediaCollections;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Endpoints\MediaEndpointContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\GetMediaResponseContract;
@@ -14,15 +16,20 @@ use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\StoreMediaReq
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\DestroyMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\_Private\MediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Models\StorableMediaTransformerContract;
-
+/**
+ * @var Model $this
+ * @implements 
+ */
 trait HasTrustupMedia
 {
     /**
      * Getting model identifier for media.trustup.io
      */
-    public function getTrustupMediaModelId(): int
+    public function getTrustupMediaModelId(): string
     {
-        return $this->id;
+        /** @var Model $this */
+        return $this->uuid ??
+            $this->id;
     }
 
     /**
@@ -30,7 +37,8 @@ trait HasTrustupMedia
      */
     public function getTrustupMediaModelType(): string
     {
-        return $this->getTable();
+        /** @var Model $this */
+        return Str::slug(str_replace('\\', '-', $this->getMorphClass()));
     }
 
     /**

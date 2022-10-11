@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2d0a9187fac80dd7c3eafbd1b8cfc19",
+    "content-hash": "9ccf108bd206cc3c421943955e15015a",
     "packages": [
         {
             "name": "deegitalbe/server-authorization",
@@ -645,16 +645,16 @@
         },
         {
             "name": "henrotaym/laravel-trustup-media-io-common",
-            "version": "v1.0.6-alpha.10",
+            "version": "v1.0.6-alpha.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/henrotaym/laravel-trustup-media-io-common.git",
-                "reference": "7211679af6e1853d787885462bf2b9bb41c1d73c"
+                "reference": "8c93c865479935bec06b3121b1fd062205ebf6df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/henrotaym/laravel-trustup-media-io-common/zipball/7211679af6e1853d787885462bf2b9bb41c1d73c",
-                "reference": "7211679af6e1853d787885462bf2b9bb41c1d73c",
+                "url": "https://api.github.com/repos/henrotaym/laravel-trustup-media-io-common/zipball/8c93c865479935bec06b3121b1fd062205ebf6df",
+                "reference": "8c93c865479935bec06b3121b1fd062205ebf6df",
                 "shasum": ""
             },
             "require": {
@@ -690,9 +690,9 @@
             "description": "Used by trustup applications to store and retrieve media",
             "support": {
                 "issues": "https://github.com/henrotaym/laravel-trustup-media-io-common/issues",
-                "source": "https://github.com/henrotaym/laravel-trustup-media-io-common/tree/v1.0.6-alpha.10"
+                "source": "https://github.com/henrotaym/laravel-trustup-media-io-common/tree/v1.0.6-alpha.11"
             },
-            "time": "2022-10-11T09:50:50+00:00"
+            "time": "2022-10-11T13:08:12+00:00"
         },
         {
             "name": "psr/http-client",
@@ -2885,16 +2885,16 @@
         },
         {
             "name": "orchestra/testbench-core",
-            "version": "v6.29.0",
+            "version": "v6.29.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench-core.git",
-                "reference": "8eeace7d979a7905e6fab77a30a3b05da99459c4"
+                "reference": "29a7586915885f89b8d2203efe20f76afe9cf956"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/8eeace7d979a7905e6fab77a30a3b05da99459c4",
-                "reference": "8eeace7d979a7905e6fab77a30a3b05da99459c4",
+                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/29a7586915885f89b8d2203efe20f76afe9cf956",
+                "reference": "29a7586915885f89b8d2203efe20f76afe9cf956",
                 "shasum": ""
             },
             "require": {
@@ -2971,7 +2971,7 @@
                     "type": "liberapay"
                 }
             ],
-            "time": "2022-08-24T00:15:20+00:00"
+            "time": "2022-10-11T12:12:52+00:00"
         },
         {
             "name": "phar-io/manifest",

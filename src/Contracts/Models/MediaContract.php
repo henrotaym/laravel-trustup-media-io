@@ -67,8 +67,8 @@ interface MediaContract extends HasDimensionsContract
     /** @return static */
     public function setModelType(string $modelType): MediaContract;
 
-    public function getModelId(): int;
+    public function getModelId(): string;
 
     /** @return static */
-    public function setModelId(int $modelId): MediaContract;
+    public function setModelId(string $modelId): MediaContract;
 }

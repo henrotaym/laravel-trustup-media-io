@@ -16,7 +16,7 @@ class Media implements MediaContract
     protected ?string $appKey = null;
     protected string $uuid;
     protected string $modelType;
-    protected int $modelId;
+    protected string $modelId;
     protected string $url;
     /** @var Collection<int, ConversionContract> */
     protected Collection $conversions;
@@ -178,13 +178,13 @@ class Media implements MediaContract
         return $this;
     }
 
-    public function getModelId(): int
+    public function getModelId(): string
     {
         return $this->modelId;
     }
 
     /** @return static */
-    public function setModelId(int $modelId): MediaContract
+    public function setModelId(string $modelId): MediaContract
     {
         $this->modelId = $modelId;
 

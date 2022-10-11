@@ -17,7 +17,7 @@ interface HasTrustupMediaContract
     /**
      * Getting model identifier for media.trustup.io
      */
-    public function getTrustupMediaModelId(): int;
+    public function getTrustupMediaModelId(): string;
 
     /**
      * Getting model type for media.trustup.io
