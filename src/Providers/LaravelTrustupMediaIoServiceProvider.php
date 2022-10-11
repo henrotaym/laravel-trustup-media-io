@@ -18,6 +18,7 @@ use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Models\MediaTransform
 use Henrotaym\LaravelPackageVersioning\Providers\Abstracts\VersionablePackageServiceProvider;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\DestroyMediaResponseContract;
 use Henrotaym\LaravelTrustupMediaIo\Responses\Media\DestroyMediaResponse;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class LaravelTrustupMediaIoServiceProvider extends VersionablePackageServiceProvider
 {
@@ -49,6 +50,6 @@ class LaravelTrustupMediaIoServiceProvider extends VersionablePackageServiceProv
 
     protected function addToBoot(): void
     {
-        //
+        Relation::requireMorphMap();
     }
 }
