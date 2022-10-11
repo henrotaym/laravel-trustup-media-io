@@ -5,6 +5,7 @@ use Henrotaym\LaravelTrustupMediaIo\Tests\TestCase;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\MediaContract;
 use Henrotaym\LaravelPackageVersioning\Testing\Traits\InstallPackageTest;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Endpoints\MediaEndpointContract;
+use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\DestroyMediaResponseContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Models\ConversionContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Models\StorableMediaContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\GetMediaResponseContract;
@@ -38,6 +39,7 @@ class InstallingPackageTest extends TestCase
             $this->app->make(StorableMediaTransformerContract::class),
             $this->app->make(GetMediaRequestTransformerContract::class),
             $this->app->make(StoreMediaRequestTransformerContract::class),
+            $this->app->make(DestroyMediaResponseContract::class),
         );
     }
 }

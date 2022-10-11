@@ -16,6 +16,8 @@ use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\GetMediaResponseCo
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\StoreMediaResponseContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Models\MediaTransformerContract;
 use Henrotaym\LaravelPackageVersioning\Providers\Abstracts\VersionablePackageServiceProvider;
+use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\DestroyMediaResponseContract;
+use Henrotaym\LaravelTrustupMediaIo\Responses\Media\DestroyMediaResponse;
 
 class LaravelTrustupMediaIoServiceProvider extends VersionablePackageServiceProvider
 {
@@ -33,6 +35,7 @@ class LaravelTrustupMediaIoServiceProvider extends VersionablePackageServiceProv
         $this->app->bind(GetMediaResponseContract::class, GetMediaResponse::class);
         $this->app->bind(StoreMediaResponseContract::class, StoreMediaResponse::class);
         $this->app->bind(MediaTransformerContract::class, MediaTransformer::class);
+        $this->app->bind(DestroyMediaResponseContract::class, DestroyMediaResponse::class);
     }
 
     protected function registerMediaEndpoint(): self

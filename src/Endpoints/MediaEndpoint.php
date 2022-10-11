@@ -4,12 +4,15 @@ namespace Henrotaym\LaravelTrustupMediaIo\Endpoints;
 use Henrotaym\LaravelApiClient\Contracts\ClientContract;
 use Henrotaym\LaravelApiClient\Contracts\RequestContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Endpoints\MediaEndpointContract;
+use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\DestroyMediaResponseContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\GetMediaResponseContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\StoreMediaResponseContract;
 use Henrotaym\LaravelTrustupMediaIo\Facades\Package;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\_Private\MediaRequestContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\DestroyMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\GetMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\StoreMediaRequestContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Requests\Media\DestroyMediaRequestTransformerContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Requests\Media\GetMediaRequestTransformerContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Requests\Media\StoreMediaRequestTransformerContract;
 
@@ -18,15 +21,18 @@ class MediaEndpoint implements MediaEndpointContract
     protected ClientContract $client;
     protected GetMediaRequestTransformerContract $getRequestTransformer;
     protected StoreMediaRequestTransformerContract $storeRequestTransformer;
+    protected DestroyMediaRequestTransformerContract $destroyRequestTransformer;
     
     public function __construct(
         ClientContract $client,
         GetMediaRequestTransformerContract $getRequestTransformer,
         StoreMediaRequestTransformerContract $storeRequestTransformer,
+        DestroyMediaRequestTransformerContract $destroyRequestTransformer,
     ) {
         $this->client = $client;
         $this->getRequestTransformer = $getRequestTransformer;
         $this->storeRequestTransformer = $storeRequestTransformer;
+        $this->destroyRequestTransformer = $destroyRequestTransformer;
     }
 
     public function store(StoreMediaRequestContract $request): StoreMediaResponseContract
@@ -83,5 +89,27 @@ class MediaEndpoint implements MediaEndpointContract
         endif;
 
         $request->setAppKey(Package::getConfig('app_key'));
+    }
+
+    public function destroy(DestroyMediaRequestContract $request): DestroyMediaResponseContract
+    {
+        $this->prepareMediaRequest($request);
+        
+        /** @var RequestContract */
+        $clientRequest = app()->make(RequestContract::class);
+
+        $clientRequest->setVerb('DELETE')
+            ->setUrl('/')
+            ->addQuery($this->destroyRequestTransformer->toArray($request));
+
+        /** @var DestroyMediaResponseContract */
+        $response = app()->make(DestroyMediaResponseContract::class);
+        $apiResponse = $this->client->try($clientRequest, "Could not destroy media.");
+
+        if ($apiResponse->failed()):
+            report($apiResponse->error());
+        endif;
+
+        return $response->setResponse($apiResponse);
     }
 }
