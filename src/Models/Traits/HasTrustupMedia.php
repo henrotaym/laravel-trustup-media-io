@@ -17,16 +17,25 @@ use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Models\Storable
 
 trait HasTrustupMedia
 {
+    /**
+     * Getting model identifier for media.trustup.io
+     */
     public function getTrustupMediaModelId(): int
     {
         return $this->id;
     }
 
+    /**
+     * Getting model type for media.trustup.io
+     */
     public function getTrustupMediaModelType(): string
     {
         return $this->getTable();
     }
 
+    /**
+     * Adding trustup media using a customized request.
+     */
     public function addTrustupMedia(StoreMediaRequestContract $request): StoreMediaResponseContract
     {
         $this->prepareTrustupMediaRequest($request);
@@ -37,6 +46,9 @@ trait HasTrustupMedia
         return $endpoint->store($request);
     }
 
+    /**
+     * Adding trustup media from a single resource. 
+     */
     public function addTrustupMediaFromResource(
         string|UploadedFile|StreamInterface $resource,
         string|MediaCollections|null $collection,
@@ -46,7 +58,10 @@ trait HasTrustupMedia
         return $this->addTrustupMediaFromResourceCollection(collect([$resource]), $collection, $isUsingQueue);
     }
     
-    /** @param Collection<int, string|UploadedFile|StreamInterface> $media */
+    /** 
+     * Adding trustup media from a resources collection.
+     * 
+     * @param Collection<int, string|UploadedFile|StreamInterface> $resourceCollection */
     public function addTrustupMediaFromResourceCollection(
         Collection $resourceCollection,
         string|MediaCollections|null $collection,
@@ -72,6 +87,9 @@ trait HasTrustupMedia
         return $this->addTrustupMedia($request);
     }
 
+    /**
+     * Retrieving trustup media using a customized request.
+     */
     public function getTrustupMedia(GetMediaRequestContract $request): GetMediaResponseContract
     {
         $this->prepareTrustupMediaRequest($request);
@@ -85,6 +103,9 @@ trait HasTrustupMedia
         return $endpoint->get($request);
     }
 
+    /**
+     * Retrieving trustup media linked to given collection.
+     */
     public function getTrustupMediaCollection(string|MediaCollections $mediaCollection, bool $firstOnly = false): GetMediaResponseContract
     {
         /** @var GetMediaRequestContract */
@@ -99,6 +120,9 @@ trait HasTrustupMedia
         return $this->getTrustupMedia($request);
     }
 
+    /**
+     * Deleting trustup media using a customized request.
+     */
     public function deleteTrustupMedia(DestroyMediaRequestContract $request): DestroyMediaResponseContract
     {
         $this->prepareTrustupMediaRequest($request);
@@ -109,6 +133,9 @@ trait HasTrustupMedia
         return $endpoint->destroy($request);
     }
 
+    /**
+     * Deleting trustup media matching given uuids collection.
+     */
     public function deleteTrustupMediaByUuidCollection(Collection $mediaUuidCollection): DestroyMediaResponseContract
     {
         /** @var DestroyMediaRequestContract */
@@ -119,6 +146,9 @@ trait HasTrustupMedia
         return $this->deleteTrustupMedia($request);
     }
     
+    /**
+     * Deleting trustup media linked to given collection.
+     */
     public function deleteTrustupMediaCollection(string|MediaCollections $mediaCollection): DestroyMediaResponseContract
     {
         /** @var DestroyMediaRequestContract */
