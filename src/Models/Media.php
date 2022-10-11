@@ -2,11 +2,13 @@
 namespace Henrotaym\LaravelTrustupMediaIo\Models;
 
 use Illuminate\Support\Collection;
+use Illuminate\Contracts\Support\Arrayable;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Models\MediaContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Models\Traits\HasDimensions;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Models\ConversionContract;
+use Henrotaym\LaravelTrustupMediaIo\Contracts\Transformers\Models\MediaTransformerContract;
 
-class Media implements MediaContract
+class Media implements MediaContract, Arrayable
 {
     use HasDimensions;
 
@@ -189,5 +191,13 @@ class Media implements MediaContract
         $this->modelId = $modelId;
 
         return $this;
+    }
+
+    public function toArray()
+    {
+        /** @var MediaTransformerContract */
+        $transformer = app()->make(MediaTransformerContract::class);
+
+        return $transformer->toArray($this);
     }
 }
