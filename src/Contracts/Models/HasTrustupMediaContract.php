@@ -7,6 +7,7 @@ use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\StoreMediaResponse
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\DestroyMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\GetMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\StoreMediaRequestContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Enums\Media\MediaCollections;
 use Illuminate\Support\Collection;
 
 interface HasTrustupMediaContract
@@ -23,5 +24,5 @@ interface HasTrustupMediaContract
     
     public function deleteTrustupMediaByUuids(Collection $mediaUuidCollection): DestroyMediaResponseContract;
     
-    public function deleteTrustupMediaCollection(string $mediaCollectionName): DestroyMediaResponseContract;
+    public function deleteTrustupMediaCollection(string|MediaCollections $mediaCollection): DestroyMediaResponseContract;
 }

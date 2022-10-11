@@ -9,6 +9,7 @@ use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\_Private\Medi
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\DestroyMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\GetMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\StoreMediaRequestContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Enums\Media\MediaCollections;
 use Illuminate\Support\Collection;
 
 trait HasTrustupMedia
@@ -66,12 +67,14 @@ trait HasTrustupMedia
         return $this->deleteTrustupMedia($request);
     }
     
-    public function deleteTrustupMediaCollection(string $mediaCollectionName): DestroyMediaResponseContract
+    public function deleteTrustupMediaCollection(string|MediaCollections $mediaCollection): DestroyMediaResponseContract
     {
         /** @var DestroyMediaRequestContract */
         $request = app()->make(DestroyMediaRequestContract::class);
 
-        $request->setCollection($mediaCollectionName);
+        is_string($mediaCollection) ?
+            $request->setCollection($mediaCollection)
+            : $request->setMediaCollection($mediaCollection);
 
         return $this->deleteTrustupMedia($request);
     }
