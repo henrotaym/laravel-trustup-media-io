@@ -1,16 +1,19 @@
 <?php
 namespace Henrotaym\LaravelTrustupMediaIo\Models\Traits;
 
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Collection;
+use Psr\Http\Message\StreamInterface;
+use Henrotaym\LaravelTrustupMediaIoCommon\Enums\Media\MediaCollections;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Endpoints\MediaEndpointContract;
-use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\DestroyMediaResponseContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\GetMediaResponseContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\StoreMediaResponseContract;
-use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\_Private\MediaRequestContract;
-use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\DestroyMediaRequestContract;
+use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\DestroyMediaResponseContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\GetMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\StoreMediaRequestContract;
-use Henrotaym\LaravelTrustupMediaIoCommon\Enums\Media\MediaCollections;
-use Illuminate\Support\Collection;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\DestroyMediaRequestContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\_Private\MediaRequestContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Models\StorableMediaTransformerContract;
 
 trait HasTrustupMedia
 {
@@ -34,6 +37,41 @@ trait HasTrustupMedia
         return $endpoint->store($request);
     }
 
+    public function addTrustupMediaFromResource(
+        string|UploadedFile|StreamInterface $resource,
+        string|MediaCollections|null $collection,
+        bool $isUsingQueue = false
+    ): StoreMediaResponseContract
+    {
+        return $this->addTrustupMediaFromResourceCollection(collect($resource), $collection, $isUsingQueue);
+    }
+    
+    /** @param Collection<int, string|UploadedFile|StreamInterface> $media */
+    public function addTrustupMediaFromResourceCollection(
+        Collection $resourceCollection,
+        string|MediaCollections|null $collection,
+        bool $isUsingQueue = false
+    ): StoreMediaResponseContract
+    {
+        /** @var StorableMediaTransformerContract */
+        $transformer = app()->make(StorableMediaTransformerContract::class);
+        /** @var StoreMediaRequestContract */
+        $request = app()->make(StoreMediaRequestContract::class);
+
+        $resourceCollection->each(
+            fn (string|UploadedFile|StreamInterface $resource) =>
+                $transformer->fromResource($resource)
+        );
+
+        $request->useQueue($isUsingQueue);
+
+        $collection instanceof MediaCollections ?
+            $request->setMediaCollection($collection)
+            : $request->setCollection($collection);
+        
+        return $this->addTrustupMedia($request);
+    }
+
     public function getTrustupMedia(GetMediaRequestContract $request): GetMediaResponseContract
     {
         $this->prepareTrustupMediaRequest($request);
@@ -47,6 +85,20 @@ trait HasTrustupMedia
         return $endpoint->get($request);
     }
 
+    public function getTrustupMediaCollection(string|MediaCollections $mediaCollection, bool $firstOnly = false): GetMediaResponseContract
+    {
+        /** @var GetMediaRequestContract */
+        $request = app()->make(GetMediaRequestContract::class);
+
+        $mediaCollection instanceof MediaCollections ?
+            $request->setMediaCollection($mediaCollection)
+            : $request->setCollection($mediaCollection);
+
+        $request->firstOnly($firstOnly);
+
+        return $this->getTrustupMedia($request);
+    }
+
     public function deleteTrustupMedia(DestroyMediaRequestContract $request): DestroyMediaResponseContract
     {
         $this->prepareTrustupMediaRequest($request);
@@ -57,7 +109,7 @@ trait HasTrustupMedia
         return $endpoint->destroy($request);
     }
 
-    public function deleteTrustupMediaByUuids(Collection $mediaUuidCollection): DestroyMediaResponseContract
+    public function deleteTrustupMediaByUuidCollection(Collection $mediaUuidCollection): DestroyMediaResponseContract
     {
         /** @var DestroyMediaRequestContract */
         $request = app()->make(DestroyMediaRequestContract::class);
