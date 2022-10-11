@@ -43,7 +43,7 @@ trait HasTrustupMedia
         bool $isUsingQueue = false
     ): StoreMediaResponseContract
     {
-        return $this->addTrustupMediaFromResourceCollection(collect($resource), $collection, $isUsingQueue);
+        return $this->addTrustupMediaFromResourceCollection(collect([$resource]), $collection, $isUsingQueue);
     }
     
     /** @param Collection<int, string|UploadedFile|StreamInterface> $media */
@@ -60,7 +60,7 @@ trait HasTrustupMedia
 
         $resourceCollection->each(
             fn (string|UploadedFile|StreamInterface $resource) =>
-                $transformer->fromResource($resource)
+                $request->addMedia($transformer->fromResource($resource))
         );
 
         $request->useQueue($isUsingQueue);
