@@ -161,3 +161,40 @@ class Post implements HasTrustupMediaContract
     }
 }
 ```
+
+### Exposing your models
+```php
+use Deegitalbe\LaravelTrustupIoExternalModelRelations\Traits\Resources\IsExternalModelRelatedResource;
+use Henrotaym\LaravelTrustupMediaIo\Resources\Models\Media;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class PostResource extends JsonResource
+{
+    use IsExternalModelRelatedResource;
+
+    public function toArray($request)
+    {
+        return [
+            'cover' => new Media($this->whenExternalRelationLoaded('cover')),
+            'images' => Media::collection($this->whenExternalRelationLoaded('images'))
+        ];
+    }
+}
+```
+
+### Eager loading your relations
+```php
+use Illuminate\Routing\Controller;
+use App\Models\Post;
+use App\Http\Resources\PostResource;
+
+class PostController extends Controller
+{
+    public function index()
+    {
+        $posts = Post::all()->loadExternalRelations('cover', 'images');
+
+        return PostResource::collection($posts);
+    }
+}
+```
