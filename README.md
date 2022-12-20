@@ -15,9 +15,7 @@ TRUSTUP_SERVER_AUTHORIZATION=
 ```
 
 ### Prepare your models
-
-Your model should look like this
-
+Here is a example where a post is having a single cover and multiple images.
 ``` php
 <?php
 use Illuminate\Http\UploadedFile;
@@ -162,7 +160,8 @@ class Post implements HasTrustupMediaContract
 }
 ```
 
-### Exposing your models
+### Expose your models (using a resource)
+Your resource should look like this.
 ```php
 use Deegitalbe\LaravelTrustupIoExternalModelRelations\Traits\Resources\IsExternalModelRelatedResource;
 use Henrotaym\LaravelTrustupMediaIo\Resources\Models\Media;
@@ -183,6 +182,7 @@ class PostResource extends JsonResource
 ```
 
 ### Eager loading your relations
+Even if you load several relations, only one request will be performed ⚡
 ```php
 use Illuminate\Routing\Controller;
 use App\Models\Post;
@@ -195,6 +195,25 @@ class PostController extends Controller
         $posts = Post::all()->loadExternalRelations('cover', 'images');
 
         return PostResource::collection($posts);
+    }
+}
+```
+
+### Getting related models
+If your relation is not eager loaded, it will be loaded when using model getter (n+1 requests tho...)
+```php
+use Illuminate\Routing\Controller;
+use App\Models\Post;
+use App\Http\Resources\PostResource;
+
+class PostController extends Controller
+{
+    public function index()
+    {
+        $post = Post::first();
+
+        $post->getCover() // ?MediaContract
+        $post->getImages() // Collection<int, MediaContract>
     }
 }
 ```
