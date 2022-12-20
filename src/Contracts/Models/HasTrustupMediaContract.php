@@ -1,6 +1,8 @@
 <?php
 namespace Henrotaym\LaravelTrustupMediaIo\Contracts\Models;
 
+use Deegitalbe\LaravelTrustupIoExternalModelRelations\Contracts\Models\ExternalModelRelatedModelContract;
+use Deegitalbe\LaravelTrustupIoExternalModelRelations\Contracts\Models\Relations\ExternalModelRelationContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\DestroyMediaResponseContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\GetMediaResponseContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\StoreMediaResponseContract;
@@ -12,7 +14,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Psr\Http\Message\StreamInterface;
 
-interface HasTrustupMediaContract
+interface HasTrustupMediaContract extends ExternalModelRelatedModelContract
 {
     /**
      * Getting model identifier for media.trustup.io
@@ -72,4 +74,22 @@ interface HasTrustupMediaContract
      * Deleting trustup media linked to given collection.
      */
     public function deleteTrustupMediaCollection(string|MediaCollections $mediaCollection): DestroyMediaResponseContract;
+
+    /**
+     * Media relation based on stored media identifier.
+     * 
+     * @param string $idProperty
+     * @param string $name
+     * @return ExternalModelRelationContract
+     */
+    public function hasOneTrustupMedia(string $idProperty, string $name = null): ExternalModelRelationContract;
+
+    /**
+     * Media relation based on stored media identifiers.
+     * 
+     * @param string $idsProperty
+     * @param string $name
+     * @return ExternalModelRelationContract
+     */
+    public function hasManyTrustupMedia(string $idsProperty, string $name = null): ExternalModelRelationContract;
 }

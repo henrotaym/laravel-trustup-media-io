@@ -1,12 +1,13 @@
 <?php
 namespace Henrotaym\LaravelTrustupMediaIo\Contracts\Models;
 
+use Deegitalbe\LaravelTrustupIoExternalModelRelations\Contracts\Models\ExternalModelContract;
 use Illuminate\Support\Collection;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Models\ConversionContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Models\_Private\HasDimensionsContract;
 use Illuminate\Contracts\Support\Arrayable;
 
-interface MediaContract extends HasDimensionsContract, Arrayable
+interface MediaContract extends HasDimensionsContract, Arrayable, ExternalModelContract
 {
     public function getName(): ?string;
 

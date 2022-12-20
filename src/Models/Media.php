@@ -200,4 +200,9 @@ class Media implements MediaContract
 
         return $transformer->toArray($this);
     }
+
+    public function getExternalRelationIdentifier(): string|int
+    {
+        return $this->getUuid();
+    }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace Henrotaym\LaravelTrustupMediaIo\Models\Traits;
 
+use Deegitalbe\LaravelTrustupIoExternalModelRelations\Contracts\Models\Relations\ExternalModelRelationContract;
+use Deegitalbe\LaravelTrustupIoExternalModelRelations\Traits\Models\IsExternalModelRelatedModel;
 use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
@@ -11,6 +13,7 @@ use Henrotaym\LaravelTrustupMediaIo\Contracts\Endpoints\MediaEndpointContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\GetMediaResponseContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\StoreMediaResponseContract;
 use Henrotaym\LaravelTrustupMediaIo\Contracts\Responses\Media\DestroyMediaResponseContract;
+use Henrotaym\LaravelTrustupMediaIo\Models\MediaRelationLoadingCallback;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\GetMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\StoreMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\DestroyMediaRequestContract;
@@ -22,6 +25,8 @@ use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Models\Storable
  */
 trait HasTrustupMedia
 {
+    use IsExternalModelRelatedModel;
+
     /**
      * Getting model identifier for media.trustup.io
      */
@@ -173,5 +178,37 @@ trait HasTrustupMedia
     {
         $request->setModelId($this->getTrustupMediaModelId())
                 ->setModelType($this->getTrustupMediaModelType());
+    }
+
+    /**
+     * Media relation based on stored media identifier.
+     * 
+     * @param string $idProperty
+     * @param string $name
+     * @return ExternalModelRelationContract
+     */
+    public function hasOneTrustupMedia(string $idProperty, string $name = null): ExternalModelRelationContract
+    {
+        return $this->belongsToExternalModel(
+            app()->make(MediaRelationLoadingCallback::class),
+            $idProperty,
+            $name
+        );
+    }
+
+    /**
+     * Media relation based on stored media identifiers.
+     * 
+     * @param string $idsProperty
+     * @param string $name
+     * @return ExternalModelRelationContract
+     */
+    public function hasManyTrustupMedia(string $idsProperty, string $name = null): ExternalModelRelationContract
+    {
+        return $this->hasManyExternalModels(
+            app()->make(MediaRelationLoadingCallback::class),
+            $idsProperty,
+            $name
+        );
     }
 }
