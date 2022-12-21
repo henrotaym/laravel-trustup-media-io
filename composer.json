@@ -14,7 +14,7 @@
         "henrotaym/laravel-api-client": "^1.5.2",
         "deegitalbe/server-authorization": "^1.2",
         "henrotaym/laravel-trustup-media-io-common": "^1.2.1",
-        "deegitalbe/laravel-trustup-io-external-model-relations": "^0.0.8"
+        "deegitalbe/laravel-trustup-io-external-model-relations": "^1.0.0"
     },
     "require-dev": {
         "orchestra/testbench": "^6.0",
