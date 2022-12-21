@@ -94,6 +94,8 @@ class Post implements HasTrustupMediaContract
         if (!$response->ok()) return $this;
 
         $this->cover()->setRelatedModels($response->getFirstMedia());
+
+        return $this;
     }
 
     /**
@@ -110,6 +112,8 @@ class Post implements HasTrustupMediaContract
         if (!$response->ok()) return $this;
 
         $this->cover()->setRelatedModels(null);
+
+        return $this;
     }
 
     /**
@@ -125,6 +129,8 @@ class Post implements HasTrustupMediaContract
         if (!$response->ok()) return $this;
 
         $this->images()->addToRelatedModels($response->getFirstMedia());
+
+        return $this;
     }
 
     /**
@@ -133,13 +139,15 @@ class Post implements HasTrustupMediaContract
      * @param Collection<int, string|UploadedFile>
      * @return static
      */
-    public function addImages(Collection $resources)
+    public function addImages(Collection $resources): self
     {
         $response = $this->addTrustupMediaFromResourceCollection($resources, MediaCollections::IMAGES);
 
         if (!$response->ok()) return $this;
 
         $this->images()->addToRelatedModels($response->getMedia());
+
+        return $this;
     }
 
     /**
@@ -156,6 +164,8 @@ class Post implements HasTrustupMediaContract
         if (!$response->ok()) return $this;
 
         $this->images()->setRelatedModels(null);
+
+        return $this;
     }
 }
 ```
