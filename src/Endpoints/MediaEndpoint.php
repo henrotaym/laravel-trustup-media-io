@@ -1,4 +1,5 @@
 <?php
+
 namespace Henrotaym\LaravelTrustupMediaIo\Endpoints;
 
 use Henrotaym\LaravelApiClient\Contracts\ClientContract;
@@ -19,10 +20,13 @@ use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Requests\Media\
 class MediaEndpoint implements MediaEndpointContract
 {
     protected ClientContract $client;
+
     protected GetMediaRequestTransformerContract $getRequestTransformer;
+
     protected StoreMediaRequestTransformerContract $storeRequestTransformer;
+
     protected DestroyMediaRequestTransformerContract $destroyRequestTransformer;
-    
+
     public function __construct(
         ClientContract $client,
         GetMediaRequestTransformerContract $getRequestTransformer,
@@ -38,7 +42,7 @@ class MediaEndpoint implements MediaEndpointContract
     public function store(StoreMediaRequestContract $request): StoreMediaResponseContract
     {
         $this->prepareMediaRequest($request);
-        
+
         /** @var RequestContract */
         $clientRequest = app()->make(RequestContract::class);
 
@@ -49,33 +53,45 @@ class MediaEndpoint implements MediaEndpointContract
 
         /** @var StoreMediaResponseContract */
         $response = app()->make(StoreMediaResponseContract::class);
-        $apiResponse = $this->client->try($clientRequest, "Could not store media.");
+        $apiResponse = $this->client->try($clientRequest, 'Could not store media.');
 
-        if ($apiResponse->failed()):
+        if ($apiResponse->failed()) {
             report($apiResponse->error());
-        endif;
+        }
 
         return $response->setResponse($apiResponse);
     }
 
     public function get(GetMediaRequestContract $request): GetMediaResponseContract
     {
+        return $this->retrieveMedia($request, 'GET', '/', 'Could not get media.');
+    }
+
+    public function search(GetMediaRequestContract $request): GetMediaResponseContract
+    {
+        return $this->retrieveMedia($request, 'POST', '/search', 'Could not search media.');
+    }
+
+    protected function retrieveMedia(GetMediaRequestContract $request, string $verb, string $url, string $errorMessage): GetMediaResponseContract
+    {
         $this->prepareMediaRequest($request);
-        
+
         /** @var RequestContract */
         $clientRequest = app()->make(RequestContract::class);
+        $clientRequest->setVerb($verb)->setUrl($url);
 
-        $clientRequest->setVerb('GET')
-            ->setUrl('/')
-            ->addQuery($this->getRequestTransformer->toArray($request));
+        $attributes = $this->getRequestTransformer->toArray($request);
+        $verb === 'GET'
+            ? $clientRequest->addQuery($attributes)
+            : $clientRequest->addData($attributes);
 
         /** @var GetMediaResponseContract */
         $response = app()->make(GetMediaResponseContract::class);
-        $apiResponse = $this->client->try($clientRequest, "Could not get media.");
+        $apiResponse = $this->client->try($clientRequest, $errorMessage);
 
-        if ($apiResponse->failed()):
+        if ($apiResponse->failed()) {
             report($apiResponse->error());
-        endif;
+        }
 
         return $response->setResponse($apiResponse);
     }
@@ -84,9 +100,9 @@ class MediaEndpoint implements MediaEndpointContract
     {
         if ($request->hasAppKey()
             || $request->isExplicitelyNotHavingAppKey()
-        ):
+        ) {
             return;
-        endif;
+        }
 
         $request->setAppKey(Package::getConfig('app_key'));
     }
@@ -94,7 +110,7 @@ class MediaEndpoint implements MediaEndpointContract
     public function destroy(DestroyMediaRequestContract $request): DestroyMediaResponseContract
     {
         $this->prepareMediaRequest($request);
-        
+
         /** @var RequestContract */
         $clientRequest = app()->make(RequestContract::class);
 
@@ -104,11 +120,11 @@ class MediaEndpoint implements MediaEndpointContract
 
         /** @var DestroyMediaResponseContract */
         $response = app()->make(DestroyMediaResponseContract::class);
-        $apiResponse = $this->client->try($clientRequest, "Could not destroy media.");
+        $apiResponse = $this->client->try($clientRequest, 'Could not destroy media.');
 
-        if ($apiResponse->failed()):
+        if ($apiResponse->failed()) {
             report($apiResponse->error());
-        endif;
+        }
 
         return $response->setResponse($apiResponse);
     }
