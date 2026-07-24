@@ -64,40 +64,30 @@ class MediaEndpoint implements MediaEndpointContract
 
     public function get(GetMediaRequestContract $request): GetMediaResponseContract
     {
-        $this->prepareMediaRequest($request);
-
-        /** @var RequestContract */
-        $clientRequest = app()->make(RequestContract::class);
-
-        $clientRequest->setVerb('GET')
-            ->setUrl('/')
-            ->addQuery($this->getRequestTransformer->toArray($request));
-
-        /** @var GetMediaResponseContract */
-        $response = app()->make(GetMediaResponseContract::class);
-        $apiResponse = $this->client->try($clientRequest, 'Could not get media.');
-
-        if ($apiResponse->failed()) {
-            report($apiResponse->error());
-        }
-
-        return $response->setResponse($apiResponse);
+        return $this->retrieveMedia($request, 'GET', '/', 'Could not get media.');
     }
 
     public function search(GetMediaRequestContract $request): GetMediaResponseContract
+    {
+        return $this->retrieveMedia($request, 'POST', '/search', 'Could not search media.');
+    }
+
+    protected function retrieveMedia(GetMediaRequestContract $request, string $verb, string $url, string $errorMessage): GetMediaResponseContract
     {
         $this->prepareMediaRequest($request);
 
         /** @var RequestContract */
         $clientRequest = app()->make(RequestContract::class);
+        $clientRequest->setVerb($verb)->setUrl($url);
 
-        $clientRequest->setVerb('POST')
-            ->setUrl('/search')
-            ->addData($this->getRequestTransformer->toArray($request));
+        $attributes = $this->getRequestTransformer->toArray($request);
+        $verb === 'GET'
+            ? $clientRequest->addQuery($attributes)
+            : $clientRequest->addData($attributes);
 
         /** @var GetMediaResponseContract */
         $response = app()->make(GetMediaResponseContract::class);
-        $apiResponse = $this->client->try($clientRequest, 'Could not search media.');
+        $apiResponse = $this->client->try($clientRequest, $errorMessage);
 
         if ($apiResponse->failed()) {
             report($apiResponse->error());
